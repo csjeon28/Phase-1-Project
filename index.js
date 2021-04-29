@@ -5,6 +5,7 @@ const countryStats = document.getElementById('selected-country-stats');
 const masterTracker = [];
 const countryDropdown = document.getElementById('country-select');
 const sortDropdown = document.getElementById('sort-select');
+let ourTracker = [];
 
 //communication with server
 const fetchMasterTracker = async () => {
@@ -16,10 +17,11 @@ const fetchMasterTracker = async () => {
 //functions
 const masterFunction = (results) => {
     createMasterTracker(results);
-    const ourTracker = createOurTracker();
+    ourTracker = createOurTracker();
     renderCountryList(ourTracker);
     renderCountryStats(masterTracker, "USA");
     createCountryDropdown();
+    createSortDropdown();
     // console.log(ourTracker);
 }
 
@@ -39,6 +41,7 @@ const createMasterTracker = (results) => {
     for (const element of results) {
         masterTracker.push(element);
     }
+    masterTracker.pop();
 }
 
 const renderCountryStats = (allCountriesTracker, selectedCountry) => {
@@ -145,6 +148,18 @@ const createCountryDropdown = () => {
     }
 }
 
+const createSortDropdown = () => {
+    const option = document.createElement('option');
+    option.text = 'A-Z';
+    sortDropdown.add(option);
+    const option1 = document.createElement('option');
+    option1.text = 'Highest Active Cases';
+    sortDropdown.add(option1);
+    const option2 = document.createElement('option');
+    option2.text = 'Lowest Active Cases';
+    sortDropdown.add(option2);
+}
+
 //event listeners
 document.addEventListener('DOMContentLoaded', function () {
     fetchMasterTracker();
@@ -155,7 +170,17 @@ countryDropdown.addEventListener('change', (e) => {
     renderCountryStats(masterTracker, selectedCountry);
 })
 
-
+sortDropdown.addEventListener('change', (e) => {
+    const selectedSort = e.target.value;
+    if (selectedSort === 'A-Z') {
+        ourTracker = ourTracker.sort((a, b) => (a['Country_text'] > b['Country_text'] ? 1 : -1));
+    } else if (selectedSort === 'Highest Active Cases') {
+        ourTracker = ourTracker.sort((a, b) => (parseInt(a['Active Cases_text'].replace(/,/g, '')) < parseInt(b['Active Cases_text'].replace(/,/g, '')) ? 1 : -1));
+    } else {
+        ourTracker = ourTracker.sort((a, b) => (parseInt(a['Active Cases_text'].replace(/,/g, '')) > parseInt(b['Active Cases_text'].replace(/,/g, '')) ? 1 : -1));
+    }
+    renderCountryList(ourTracker);
+})
 
 allCountries.addEventListener('click', (e) => {
     e.target.style.color = 'red'
