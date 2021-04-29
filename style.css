@@ -1,0 +1,19 @@
+table {
+    border: 1px rgba(7, 44, 100, 0.774)
+}
+
+th, td {
+    border: 1px rgb(44, 44, 92);
+    text-align: center;
+    padding: 8px;
+}
+
+th[scope="col"] {
+    background-color: rgb(61, 80, 87);
+    color: #fff;
+}
+
+th[colspan] {
+    background-color: rgba(148, 196, 212, 0.808);
+    color: rgb(61, 80, 87);
+}

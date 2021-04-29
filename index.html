@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>COVID-19 Statistics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>COVID-19 Live Tracker</h1>
+
+    <div>
+        <h2>COVID-19 Statistics by Country</h2>
+        <label for='country-select'>Select a country:</label>
+        <select name='country-dropdown' id='country-select'></select>
+        <ul id='selected-country-stats'></ul>
+
+        <label for='sort-by'>Sort by:</label>
+        <select name="sort-dropdown" id="sort-select"></select>
+
+    </div>
+
+    <div>
+        <table id='all-countries'>
+            <thead>
+                <tr>
+                    <th colspan="4">All Countries</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope='col'>Country</th>
+                    <th scope='col'>Active Cases</th>
+                    <th scope='col'>Last Update</th>
+                    <th scope='col'>Select</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src='index.js'></script>
+</body>
+
+</html>
