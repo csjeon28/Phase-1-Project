@@ -1,11 +1,28 @@
-table {
-    border: 1px rgba(7, 44, 100, 0.774)
+.countries-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 0 20px rgba(40, 51, 51, 0.329);
+    border: 1px rgba(7, 44, 100, 0.774);
 }
 
-th, td {
-    border: 1px rgb(44, 44, 92);
+.countries-table thead tr {
+    background-color: rgba(148, 196, 212, 0.808);
+    color: rgba(7, 44, 100, 0.774);
     text-align: center;
-    padding: 8px;
+}
+
+.countries-table th, td {
+    padding: 12px;
+}
+
+.countries-table tbody tr:nth-of-type(even) {
+    background-color: #edf5f5;
+}
+
+.countries-table tbody tr:last-of-type {
+    border-bottom: 4px solid  rgba(40, 51, 51, 0.329);
 }
 
 th[scope="col"] {
@@ -17,3 +34,4 @@ th[colspan] {
     background-color: rgba(148, 196, 212, 0.808);
     color: rgb(61, 80, 87);
 }
+
