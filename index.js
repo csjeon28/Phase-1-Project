@@ -1,11 +1,13 @@
 //variables
 const apiUrl = "https://covid-19.dataflowkit.com/v1";
+const masterTracker = [];
+let ourTracker = [];
 const allCountries = document.getElementById('all-countries');
 const countryStats = document.getElementById('selected-country-stats');
-const masterTracker = [];
 const countryDropdown = document.getElementById('country-select');
 const sortDropdown = document.getElementById('sort-select');
-let ourTracker = [];
+const activeCaseRow = document.getElementById('active-case-row');
+const buttons = document.querySelectorAll('button');
 
 //communication with server
 const fetchMasterTracker = async () => {
@@ -18,10 +20,11 @@ const fetchMasterTracker = async () => {
 const masterFunction = (results) => {
     createMasterTracker(results);
     ourTracker = createOurTracker();
-    renderCountryList(ourTracker);
-    renderCountryStats(masterTracker, "USA");
+    renderCountryTable(ourTracker);
+    renderCountryStats(masterTracker, 'USA');
     createCountryDropdown();
     createSortDropdown();
+    renderActiveCaseSum();
     // console.log(ourTracker);
 }
 
@@ -30,7 +33,7 @@ const createOurTracker = () => {
     // console.log(masterTracker)
     for (const element of masterTracker) {
         let ourElement = JSON.parse(JSON.stringify(element));;
-        ourElement["selected"] = false;
+        ourElement['selected'] = false;
         ourTempTracker.push(ourElement);
         // console.log(ourElement);
     }
@@ -121,7 +124,7 @@ const renderCountryStats = (allCountriesTracker, selectedCountry) => {
     }
 }
 
-const renderCountryList = (allCountriesTracker) => {
+const renderCountryTable = (allCountriesTracker) => {
     let rowCount = allCountries.rows.length;
     for (let i = 0; i < rowCount - 2; i++) {
         allCountries.deleteRow(-1);
@@ -135,8 +138,28 @@ const renderCountryList = (allCountriesTracker) => {
         newCell0.appendChild(document.createTextNode(`${countryObj['Country_text']}`));
         newCell1.appendChild(document.createTextNode(`${countryObj['Active Cases_text']}`));
         newCell2.appendChild(document.createTextNode(`${countryObj['Last Update']}`));
-        newCell3.appendChild(document.createTextNode(''));
+        const countrySelectBtn = document.createElement('input');
+        countrySelectBtn.type = 'button';
+        countrySelectBtn.id = 'country-select-button';
+        if (countryObj['selected'] === false) {
+            countrySelectBtn.value = '+';
+        } else {
+            countrySelectBtn.value = '✓';
+            countrySelectBtn.style.backgroundColor = 'rgb(131, 204, 131)';
+        }
+        newCell3.appendChild(countrySelectBtn);
     }
+}
+
+const renderActiveCaseSum = () => {
+    let activeCaseSum = 0;
+    for (const countryObj of ourTracker) {
+        if (countryObj['selected'] === true) {
+            activeCaseSum += parseInt(countryObj['Active Cases_text'].replace(/,/g, ''));
+        }
+    }
+    activeCaseRow.innerText = activeCaseSum;
+    // console.log(activeCaseRow)
 }
 
 const createCountryDropdown = () => {
@@ -179,9 +202,23 @@ sortDropdown.addEventListener('change', (e) => {
     } else {
         ourTracker = ourTracker.sort((a, b) => (parseInt(a['Active Cases_text'].replace(/,/g, '')) > parseInt(b['Active Cases_text'].replace(/,/g, '')) ? 1 : -1));
     }
-    renderCountryList(ourTracker);
+    renderCountryTable(ourTracker);
 })
 
-allCountries.addEventListener('click', (e) => {
-    e.target.style.color = 'red'
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'country-select-button') {
+        const clickedCountry = e.target.parentElement.parentElement.cells[0].innerHTML;
+        for (const countryObj of ourTracker) {
+            if (countryObj['Country_text'] === clickedCountry) {
+                if (countryObj['selected'] === false) {
+                    countryObj['selected'] = true;
+                } else {
+                    countryObj['selected'] = false;
+                }
+                // console.log(countryObj);
+            }
+        }
+        renderCountryTable(ourTracker);
+        renderActiveCaseSum();
+    }
 })
