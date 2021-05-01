@@ -1,7 +1,7 @@
 # Phase-1-Project
 
 User Stories:
-1. As a user, I can select a country to view the country's COVID statistics.
+1. As a user, I can use a dropdown menu to select a country to view all of the country's COVID statistics.
 
 2. As a user, I can use a dropdown menu to sort all countries by:
         * alphabetical order
@@ -9,6 +9,7 @@ User Stories:
         * lowest number of cases
 
 3. As a user, I can calculate the sum of cases for selected countries in a list.
-        * I can click a country in the list to select it and add number of cases to the sum.
-        * I can click a country in the list to deselect it and remove number of cases from the sum.
+        * I can click a plus button next to each country in the list to select it and add number of cases to the sum.
+        * I can click a check button next to each country in the list to deselect it and remove number of cases from the sum.
+
 
