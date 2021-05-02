@@ -13,17 +13,20 @@
 
     <div>
         <h2>COVID-19 Statistics by Country</h2>
-        <label for='country-select'>Select a country:</label>
-        <select name='country-dropdown' id='country-select'></select>
-        <ul id='selected-country-stats'></ul>
-
-        <label for='sort-by'>Sort by:</label>
-        <select name="sort-dropdown" id="sort-select"></select>
-
+        <div id='statistics-by-country'>
+            <label for='country-select'>Select a country:</label>
+            <select name='country-dropdown' id='country-select'></select>
+            <ul id='selected-country-stats'></ul>
+        </div>
+        <img src='images/covid-19 image.jpeg' alt='Covid-19 Graphic'>
     </div>
 
-    <div>
-        <table id='all-countries'>
+    <div id='total-active-cases-by-country'>
+        <h2>Total Active Cases By Country</h2>
+        <label for='sort-by'>Sort by:</label>
+        <select name="sort-dropdown" id="sort-select"></select>
+        <br>
+        <table id='all-countries' class='countries-table'>
             <thead>
                 <tr>
                     <th colspan='4'>All Countries</th>
@@ -40,22 +43,22 @@
         </table>
     </div>
 
-    <div>
+    <div id='active-case-div'>
         <table id='active-case-table'>
             <thead>
-                <tr>
-                    <th colspan='1'></th>
-                </tr>
+                <th colspan='1' class='sum-table'>Total Active Cases for Selected Countries</th>
             </thead>
             <tbody>
-                <tr>
-                    <th>Total Active Cases for Selected Countries</th>
-                </tr>
                 <tr>
                     <td id='active-case-row'></td>
                 </tr>
             </tbody>
         </table>
+
+        <div id='popup' style='visibility: visible'>
+            <ul id='popup-list'></ul>
+        </div>
+
     </div>
 
     <script src='index.js'></script>
