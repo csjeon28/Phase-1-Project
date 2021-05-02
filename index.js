@@ -1,6 +1,6 @@
 //variables
 const apiUrl = "https://covid-19.dataflowkit.com/v1";
-const masterTracker = [];
+let masterTracker = [];
 let ourTracker = [];
 const allCountries = document.getElementById('all-countries');
 const countryStats = document.getElementById('selected-country-stats');
@@ -8,6 +8,8 @@ const countryDropdown = document.getElementById('country-select');
 const sortDropdown = document.getElementById('sort-select');
 const activeCaseRow = document.getElementById('active-case-row');
 const buttons = document.querySelectorAll('button');
+const popupList = document.getElementById('popup-list');
+const popup = document.getElementById('popup');
 
 //communication with server
 const fetchMasterTracker = async () => {
@@ -19,9 +21,11 @@ const fetchMasterTracker = async () => {
 //functions
 const masterFunction = (results) => {
     createMasterTracker(results);
+    masterTracker = masterTracker.sort((a, b) => (a['Country_text'] > b['Country_text'] ? 1 : -1));
     ourTracker = createOurTracker();
+    ourTracker = ourTracker.sort((a, b) => (parseInt(a['Active Cases_text'].replace(/,/g, '')) < parseInt(b['Active Cases_text'].replace(/,/g, '')) ? 1 : -1));
     renderCountryTable(ourTracker);
-    renderCountryStats(masterTracker, 'USA');
+    renderCountryStats(masterTracker, 'World');
     createCountryDropdown();
     createSortDropdown();
     renderActiveCaseSum();
@@ -141,6 +145,10 @@ const renderCountryTable = (allCountriesTracker) => {
         const countrySelectBtn = document.createElement('input');
         countrySelectBtn.type = 'button';
         countrySelectBtn.id = 'country-select-button';
+        countrySelectBtn.style.margin = 'auto';
+        countrySelectBtn.style.display = 'block';
+        countrySelectBtn.style.width = '50px';
+        countrySelectBtn.style.height = '30px';
         if (countryObj['selected'] === false) {
             countrySelectBtn.value = '+';
         } else {
@@ -158,8 +166,8 @@ const renderActiveCaseSum = () => {
             activeCaseSum += parseInt(countryObj['Active Cases_text'].replace(/,/g, ''));
         }
     }
-    activeCaseRow.innerText = activeCaseSum;
-    // console.log(activeCaseRow)
+    activeCaseRow.innerText = activeCaseSum.toLocaleString('en-US');
+    // console.log(activeCaseSum);
 }
 
 const createCountryDropdown = () => {
@@ -169,6 +177,7 @@ const createCountryDropdown = () => {
         option.text = element['Country_text'];
         countryDropdown.appendChild(option);
     }
+    countryDropdown.selectedIndex = -1;
 }
 
 const createSortDropdown = () => {
@@ -181,6 +190,7 @@ const createSortDropdown = () => {
     const option2 = document.createElement('option');
     option2.text = 'Lowest Active Cases';
     sortDropdown.add(option2);
+    sortDropdown.selectedIndex = 1;
 }
 
 //event listeners
@@ -221,4 +231,20 @@ document.addEventListener('click', (e) => {
         renderCountryTable(ourTracker);
         renderActiveCaseSum();
     }
+})
+
+activeCaseRow.addEventListener('mouseover', (e) => {
+    for (const countryObj of ourTracker) {
+        if (countryObj['selected'] === true) {
+            const popupLi = document.createElement('li');
+            popupLi.innerHTML = countryObj['Country_text'];
+            popupList.append(popupLi);
+        }
+    }
+    popup.style.visibility = 'visible';
+})
+
+activeCaseRow.addEventListener('mouseleave', (e) => {
+    popupList.innerHTML = '';
+    popup.style.visibility = 'hidden';
 })
