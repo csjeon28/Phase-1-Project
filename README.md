@@ -11,13 +11,7 @@ My single page application is a COVID-19 Tracker with live (updated hourly) stat
 * Each country also has a select button available to show the total sum of total active cases of the selected countries.
 * Features a dropdown menu to filter countries by alphabetical, highest, and lowest number of cases.
 
-## Public API Documentation:
-<a href="https://covid-19.dataflowkit.com/v1" target="_blank">Covid Live Statistics Public API</a>
-
-## Heroku Deployment:
-<a href="https://cj-covid-tracker-vanillajs.herokuapp.com/" target="_blank">Covid Tracker</a>
-
-### Objective of Phase 1 JavaScript Project: 
+## Objective of Phase 1 JavaScript Project: 
 * Pull data from a public API
 * Manipulate that data
 * Build a Single Page Application utilizing HTML/CSS/JS frontend
@@ -33,6 +27,12 @@ My single page application is a COVID-19 Tracker with live (updated hourly) stat
 3. As a user, I can calculate the sum of cases for selected countries in a list.
         * I can click a plus button next to each country in the list to select it and add number of cases to the sum.
         * I can click a check button next to each country in the list to deselect it and remove number of cases from the sum.
+
+### Public API Documentation:
+<a href="https://covid-19.dataflowkit.com/v1" target="_blank">Covid Live Statistics Public API</a>
+
+### Heroku Deployment:
+<a href="https://cj-covid-tracker-vanillajs.herokuapp.com/" target="_blank">Covid Tracker</a>
 
 <!-- ## Installation:
 1. Clone this repository to your local environment `git clone <this-repo-url>`
