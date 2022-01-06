@@ -1,13 +1,13 @@
-# Phase-1-Project
+# Phase-1-Project: My Live COVID Tracker
 
 My single page application is a COVID-19 Tracker with live (updated hourly) statistics of each country in the API database.
 * You can view statistics for each country, including:
-        * total active cases
-        * new cases
-        * total cases
-        * new deaths
-        * total deaths
-        * total recovered
+  * total active cases
+  * new cases
+  * total cases
+  * new deaths
+  * total deaths
+  * total recovered
 * Each country also has a select button available to show the total sum of total active cases of the selected countries.
 * Features a dropdown menu to filter countries by alphabetical, highest, and lowest number of cases.
 
