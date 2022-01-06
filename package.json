@@ -1,0 +1,27 @@
+{
+  "name": "phase-1-project",
+  "version": "1.0.0",
+  "description": "Phase 1 JS Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csjeon28/Phase-1-Project.git"
+  },
+  "keywords": [
+    "heroku",
+    "javascript",
+    "project"
+  ],
+  "author": "christine-jeon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csjeon28/Phase-1-Project/issues"
+  },
+  "homepage": "https://github.com/csjeon28/Phase-1-Project#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
