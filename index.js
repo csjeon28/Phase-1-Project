@@ -23,6 +23,11 @@ const masterFunction = (results) => {
     createMasterTracker(results);
     masterTracker = masterTracker.sort((a, b) => (a['Country_text'] > b['Country_text'] ? 1 : -1));
     ourTracker = createOurTracker();
+    for (const element of ourTracker) {
+        if (element['Active Cases_text'] === '' || element['Active Cases_text'] === 'N/A') {
+            element['Active Cases_text'] = '0'
+        }
+    }
     ourTracker = ourTracker.sort((a, b) => (parseInt(a['Active Cases_text'].replace(/,/g, '')) < parseInt(b['Active Cases_text'].replace(/,/g, '')) ? 1 : -1));
     renderCountryTable(ourTracker);
     renderCountryStats(masterTracker, 'World');
@@ -36,7 +41,7 @@ const createOurTracker = () => {
     const ourTempTracker = [];
     // console.log(masterTracker)
     for (const element of masterTracker) {
-        let ourElement = JSON.parse(JSON.stringify(element));;
+        let ourElement = JSON.parse(JSON.stringify(element));
         ourElement['selected'] = false;
         ourTempTracker.push(ourElement);
         // console.log(ourElement);
