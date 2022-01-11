@@ -34,5 +34,5 @@ My single page application is a COVID-19 Tracker with live (updated hourly) stat
 ### Heroku Deployment:
 <a href="https://cj-covid-tracker-vanillajs.herokuapp.com/" target="_blank">Covid Tracker</a>
 
-### Project Demo:
+### Project Screen Recording:
 <a href="https://www.dropbox.com/s/e37bokcdipclk26/JS-Phase-1-Project-Screen-Recording.mov?dl=0" target="_blank">Project Demo</a>
